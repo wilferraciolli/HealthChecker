@@ -1,24 +1,23 @@
-package com.wiltech.health.check;
+package com.wiltech.health.check.servers;
 
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.ResourceSupport;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.List;
 import java.util.UUID;
 
-/**
- * The type Health check.
- */
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class HealthCheck {
+public class ServerDescription {
 
     @Id
     @GeneratedValue(generator = "uuid")
@@ -26,20 +25,10 @@ public class HealthCheck {
     private UUID id;
 
     @NonNull
-    @Type(type ="uuid")
-    private UUID serverId;
+    private String name;
 
-    @NonNull
-    private  String name;
+    private Integer overallPercentage;
 
-    private String groupId;
-
-    private String artifactId;
-
-    private String version;
-
-    private String buildSHA;
-
-    private Integer responseCode;
+    private Link selfLink;
 
 }
