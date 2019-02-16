@@ -21,16 +21,14 @@ import java.util.UUID;
 public class HealthCheck {
 
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @NonNull
-    @Type(type ="uuid")
-    private UUID serverId;
+    private Long serverId;
 
     @NonNull
-    private  String name;
+    private String name;
 
     private String groupId;
 
