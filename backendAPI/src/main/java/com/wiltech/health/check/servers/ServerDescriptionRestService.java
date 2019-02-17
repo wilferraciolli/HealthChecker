@@ -25,7 +25,8 @@ public class ServerDescriptionRestService {
         List<ServerDescription> servers = repository.findAll();
         servers.stream().forEach(
                 server ->{
-                    server.setSelfLink(new Link("localhost:5001/api/servers/" + server.getId() +"/healthchecks", "healthStatusChecker"));
+                    server.addLink(new Link("localhost:5001/api/servers/" + server.getId() +"/healthchecks", "healthStatusChecker"));
+                    server.addLink(new Link("localhost:5001/api/servers/" + server.getId() +"/overall", "overall"));
                 }
         );
 

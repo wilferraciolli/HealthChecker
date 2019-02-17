@@ -16,6 +16,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 /**
@@ -64,7 +65,8 @@ public class HealthCheckerClient {
                         .artifactId(payload.getArtifactId())
                         .buildSHA(payload.getBuildSHA())
                         .groupId(payload.getGroupId())
-                        .responseCode(HttpStatus.OK.value())
+                        .responseCode(LocalDateTime.now().getSecond()%2 == 0 ? HttpStatus.OK.value() :  HttpStatus.BAD_REQUEST.value())
+                        .createdDateTime(LocalDateTime.now())
                         .build());
 
             }else{
@@ -73,6 +75,7 @@ public class HealthCheckerClient {
                         .serverId(serverDescriptionRepository.findByName(healthCheckType.name()).get().getId())
                         .name(healthCheckType.name())
                         .responseCode(response.statusCode())
+                        .createdDateTime(LocalDateTime.now())
                         .build());
             }
 

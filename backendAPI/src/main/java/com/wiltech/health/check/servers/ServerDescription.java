@@ -1,17 +1,16 @@
 package com.wiltech.health.check.servers;
 
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
 import org.springframework.hateoas.Link;
-import org.springframework.hateoas.ResourceSupport;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
+import java.util.Objects;
 
+/**
+ * The type Server description.
+ */
 @Data
 @Builder
 @AllArgsConstructor
@@ -28,6 +27,14 @@ public class ServerDescription {
 
     private Integer overallPercentage;
 
-    private Link selfLink;
+    @Transient
+    private List<Link> customLinks;
 
+    public void addLink(Link link) {
+        if (Objects.isNull(this.customLinks)) {
+            customLinks = new ArrayList<>();
+        }
+        customLinks.add(link);
+
+    }
 }

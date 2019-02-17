@@ -2,18 +2,17 @@ package com.wiltech.health.check;
 
 import com.wiltech.health.check.client.HealthCheckerClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * The type Health check rest service.
  */
 @RestController
 @CrossOrigin
-@RequestMapping("/servers/{id}/healthchecks")
+@RequestMapping("/servers")
 public class HealthCheckRestService {
 
     @Autowired
@@ -28,12 +27,26 @@ public class HealthCheckRestService {
      * @param id the id
      * @return the health checks for server
      */
-    @GetMapping
+    @GetMapping("/{id}/healthchecks")
     public List<HealthCheck> getHealthChecksForServer(@PathVariable("id") final Long id) {
 
-     // return Arrays.asList(HealthCheck.builder().name("Wil").serverId(1L).build());
+        // return Arrays.asList(HealthCheck.builder().name("Wil").serverId(1L).build());
+        return repository.findByServerIdOrderByCreatedDateTimeDesc(id);
+    }
 
-      return  repository.findByServerId(id);
+    @GetMapping("/{id}/overall")
+    public Integer getServerOverall(@PathVariable("id") final Long id) {
+        List<HealthCheck> healthChecks = repository.findByServerIdOrderByCreatedDateTimeDesc(id);
+
+        int successResponse = 0;
+        for (HealthCheck healthCheck : healthChecks) {
+            if (healthCheck.getResponseCode() == HttpStatus.OK.value()) {
+                successResponse++;
+            }
+        }
+
+        //retun the percentage of success rate
+        return successResponse * 100 / healthChecks.size();
     }
 
     /**
@@ -44,7 +57,6 @@ public class HealthCheckRestService {
     @GetMapping(value = "/refresh")
     public String refresh() {
         healthCheckerClient.getHealthStatuses();
-
         return "Refeshed";
     }
 

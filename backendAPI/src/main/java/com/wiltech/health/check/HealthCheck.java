@@ -1,14 +1,12 @@
 package com.wiltech.health.check;
 
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.UUID;
+import java.time.LocalDateTime;
 
 /**
  * The type Health check.
@@ -39,5 +37,7 @@ public class HealthCheck {
     private String buildSHA;
 
     private Integer responseCode;
+
+    private LocalDateTime createdDateTime;
 
 }
