@@ -1,7 +1,5 @@
 package com.wiltech.health.check.servers;
 
-
-import com.wiltech.health.check.HealthCheck;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -24,9 +22,10 @@ public class ServerDescriptionRestService {
 
         List<ServerDescription> servers = repository.findAll();
         servers.stream().forEach(
-                server ->{
-                    server.addLink(new Link("localhost:5001/api/servers/" + server.getId() +"/healthchecks", "healthStatusChecker"));
-                    server.addLink(new Link("localhost:5001/api/servers/" + server.getId() +"/overall", "overall"));
+                server -> {
+                    server.setPrimaryDeployment(server.getName().equals(server.getDeploymnet()));
+                    server.addLink(new Link("localhost:5001/api/servers/" + server.getId() + "/healthchecks", "healthStatusChecker"));
+                    server.addLink(new Link("localhost:5001/api/servers/" + server.getId() + "/overall", "overall"));
                 }
         );
 

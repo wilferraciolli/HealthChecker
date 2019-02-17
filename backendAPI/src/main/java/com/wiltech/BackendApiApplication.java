@@ -35,11 +35,10 @@ public class BackendApiApplication {
 
                 repository.save(ServerDescription.builder()
                         .name(statusType.name())
-                        .overallPercentage(100)
+                        .deploymnet(statusType.getDeployment())
                         .build());
             });
 
-            //Print every car on the database
             repository.findAll().forEach(System.out::println);
         };
     }

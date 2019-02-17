@@ -34,8 +34,14 @@ public class HealthCheckRestService {
         return repository.findByServerIdOrderByCreatedDateTimeDesc(id);
     }
 
+    /**
+     * Gets server overall.
+     *
+     * @param id the id
+     * @return the server overall
+     */
     @GetMapping("/{id}/overall")
-    public Integer getServerOverall(@PathVariable("id") final Long id) {
+    public Double getServerOverall(@PathVariable("id") final Long id) {
         List<HealthCheck> healthChecks = repository.findByServerIdOrderByCreatedDateTimeDesc(id);
 
         int successResponse = 0;
@@ -46,7 +52,7 @@ public class HealthCheckRestService {
         }
 
         //retun the percentage of success rate
-        return successResponse * 100 / healthChecks.size();
+        return Double.valueOf(successResponse * 100 / healthChecks.size());
     }
 
     /**

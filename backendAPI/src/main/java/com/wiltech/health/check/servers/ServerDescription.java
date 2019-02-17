@@ -25,11 +25,19 @@ public class ServerDescription {
     @NonNull
     private String name;
 
-    private Integer overallPercentage;
+    private String deploymnet;
+
+    @Transient
+    private Boolean primaryDeployment;
 
     @Transient
     private List<Link> customLinks;
 
+    /**
+     * Add link.
+     *
+     * @param link the link
+     */
     public void addLink(Link link) {
         if (Objects.isNull(this.customLinks)) {
             customLinks = new ArrayList<>();
