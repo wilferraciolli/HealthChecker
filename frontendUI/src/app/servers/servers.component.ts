@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from "rxjs/Subscription";
+import { ServerService } from '../shared/server/server.service';
 
 @Component({
   selector: 'app-servers',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ServersComponent implements OnInit {
 
-  constructor() { }
+  servers: Array<any>;
+  subscription: Subscription;
+
+  constructor(private serverService: ServerService) { }
 
   ngOnInit() {
+    this.subscription = this.serverService.getAll().subscribe(data => {
+      this.servers = data;
+    });
   }
 
 }

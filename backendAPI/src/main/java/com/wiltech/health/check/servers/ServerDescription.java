@@ -25,7 +25,7 @@ public class ServerDescription {
     @NonNull
     private String name;
 
-    private String deploymnet;
+    private String deployment;
 
     @Transient
     private Boolean primaryDeployment;

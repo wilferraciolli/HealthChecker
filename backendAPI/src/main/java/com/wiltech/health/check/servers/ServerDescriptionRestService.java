@@ -23,7 +23,7 @@ public class ServerDescriptionRestService {
         List<ServerDescription> servers = repository.findAll();
         servers.stream().forEach(
                 server -> {
-                    server.setPrimaryDeployment(server.getName().equals(server.getDeploymnet()));
+                    server.setPrimaryDeployment(server.getName().equals(server.getDeployment()));
                     server.addLink(new Link("localhost:5001/api/servers/" + server.getId() + "/healthchecks", "healthStatusChecker"));
                     server.addLink(new Link("localhost:5001/api/servers/" + server.getId() + "/overall", "overall"));
                 }

@@ -35,7 +35,7 @@ public class BackendApiApplication {
 
                 repository.save(ServerDescription.builder()
                         .name(statusType.name())
-                        .deploymnet(statusType.getDeployment())
+                        .deployment(statusType.getDeployment())
                         .build());
             });
 
