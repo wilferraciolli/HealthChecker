@@ -5,6 +5,7 @@ import com.wiltech.health.check.EndPointStatusPayload;
 import com.wiltech.health.check.HealthCheck;
 import com.wiltech.health.check.HealthCheckRepository;
 import com.wiltech.health.check.servers.ServerDescriptionRepository;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.net.Authenticator;
+import java.net.PasswordAuthentication;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -42,6 +45,8 @@ public class HealthCheckerClient {
     @Scheduled(cron = "0/20 * * * * ?")
     public void getHealthStatuses() {
 
+        setProxyDetails();
+
         HttpClient httpClient = generateClient();
 
         for (HealthStatusType healthCheck : HealthStatusType.values()) {
@@ -65,11 +70,11 @@ public class HealthCheckerClient {
                         .artifactId(payload.getArtifactId())
                         .buildSHA(payload.getBuildSHA())
                         .groupId(payload.getGroupId())
-                        .responseCode(LocalDateTime.now().getSecond()%2 == 0 ? HttpStatus.OK.value() :  HttpStatus.BAD_REQUEST.value())
+                        .responseCode(LocalDateTime.now().getSecond() % 2 == 0 ? HttpStatus.OK.value() : HttpStatus.BAD_REQUEST.value())
                         .createdDateTime(LocalDateTime.now())
                         .build());
 
-            }else{
+            } else {
                 logger.warn("Could not get a 200 on %s healthc check", healthCheckType.name());
                 repository.save(HealthCheck.builder()
                         .serverId(serverDescriptionRepository.findByName(healthCheckType.name()).get().getId())
@@ -98,15 +103,29 @@ public class HealthCheckerClient {
     }
 
     ///get values async
-//        httpClient.sendAsync(talentRequest, HttpResponse.BodyHandlers.ofString())
-//                .thenAccept(responseBody -> {
-//                            System.out.println(responseBody.body());
-//                        }
-//                );
+    //        httpClient.sendAsync(talentRequest, HttpResponse.BodyHandlers.ofString())
+    //                .thenAccept(responseBody -> {
+    //                            System.out.println(responseBody.body());
+    //                        }
+    //                );
 
-//        logger.info("Response status code: " + response.statusCode());
-//        logger.info("Response headers: " + response.headers());
-//        logger.info("Response body: " + response.body());
+    //        logger.info("Response status code: " + response.statusCode());
+    //        logger.info("Response headers: " + response.headers());
+    //        logger.info("Response body: " + response.body());
 
     // System.out.println(response.body());
+
+    private static void setProxyDetails() {
+        // set the wildfly system properties values
+        System.setProperty("http.proxyHost", "msl-svr135");
+        System.setProperty("http.proxyPort", "3128");
+        System.setProperty("https.proxyHost", "msl-svr135");
+        System.setProperty("https.proxyPort", "3128");
+
+        // set username and password for the proxy
+        Authenticator.setDefault(new ProxyAuthenticator("proxy", "TestProxy"));
+    }
+
 }
+
+
