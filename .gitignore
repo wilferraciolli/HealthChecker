@@ -24,3 +24,4 @@
 /.nb-gradle/
 /build/
 frontendUI/e2e/
+frontendUI/.vscode/settings.json

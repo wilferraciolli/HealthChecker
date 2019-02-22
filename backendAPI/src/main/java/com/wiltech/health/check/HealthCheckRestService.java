@@ -27,6 +27,7 @@ public class HealthCheckRestService {
      * @param id the id
      * @return the health checks for server
      */
+//    @CrossOrigin
     @GetMapping("/{id}/healthchecks")
     public List<HealthCheck> getHealthChecksForServer(@PathVariable("id") final Long id) {
 
@@ -40,6 +41,7 @@ public class HealthCheckRestService {
      * @param id the id
      * @return the server overall
      */
+//    @CrossOrigin(value = "http://localhost:4200")
     @GetMapping("/{id}/overall")
     public Double getServerOverall(@PathVariable("id") final Long id) {
         List<HealthCheck> healthChecks = repository.findByServerIdOrderByCreatedDateTimeDesc(id);

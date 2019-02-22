@@ -9,6 +9,7 @@ import { ServerService } from '../shared/server/server.service';
 })
 export class ServersComponent implements OnInit {
 
+  wil = "Wil";
   servers: Array<any>;
   subscription: Subscription;
 

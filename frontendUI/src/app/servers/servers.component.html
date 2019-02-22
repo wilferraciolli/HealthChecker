@@ -14,7 +14,10 @@
          <ng-template #primaryDeployment>
            <p>The primary deployment is {{server.deployment}}</p>
          </ng-template>
-          <a href="#" class="card-link">Card link</a>
+
+         <!-- overall percentage -->
+          <app-overall [linkToOverall]="server.customLinks[1].href"></app-overall>
+          <!--<a href="{{server.customLinks[0].href}}" class="card-link">Card link</a>-->
           <a href="#" class="card-link">Another link</a>
         </div>
       </div>
