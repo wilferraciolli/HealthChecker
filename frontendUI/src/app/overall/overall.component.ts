@@ -17,11 +17,8 @@ export class OverallComponent implements OnInit {
   constructor(private overallService: ServerOverallService) { }
 
   ngOnInit() {
-    console.log('http://' + this.linkToOverall);
     this.subscription = this.overallService.getFromUrl('http://' + this.linkToOverall).subscribe(data => {
       this.overall = data;
-      console.log(this.overall);
-      console.log(data);
     });
   }
 
