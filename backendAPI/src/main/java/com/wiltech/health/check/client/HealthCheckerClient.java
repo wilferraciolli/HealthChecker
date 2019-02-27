@@ -68,6 +68,7 @@ public class HealthCheckerClient {
                         .serverId(serverDescriptionRepository.findByName(healthCheckType.name()).get().getId())
                         .name(healthCheckType.name())
                         .artifactId(payload.getArtifactId())
+                        .version(payload.getVersion())
                         .buildSHA(payload.getBuildSHA())
                         .groupId(payload.getGroupId())
                         .responseCode(LocalDateTime.now().getSecond() % 2 == 0 ? HttpStatus.OK.value() : HttpStatus.BAD_REQUEST.value())
@@ -75,7 +76,7 @@ public class HealthCheckerClient {
                         .build());
 
             } else {
-                logger.warn("Could not get a 200 on %s healthc check", healthCheckType.name());
+                logger.warn("Could not get a 200 on %s health check", healthCheckType.name());
                 repository.save(HealthCheck.builder()
                         .serverId(serverDescriptionRepository.findByName(healthCheckType.name()).get().getId())
                         .name(healthCheckType.name())
