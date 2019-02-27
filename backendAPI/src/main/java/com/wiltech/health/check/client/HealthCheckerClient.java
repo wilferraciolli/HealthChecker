@@ -42,7 +42,7 @@ public class HealthCheckerClient {
     /**
      * Gets health statuses.
      */
-    @Scheduled(cron = "0/20 * * * * ?")
+    @Scheduled(cron = "0/60 * * * * ?")
     public void getHealthStatuses() {
 
         setProxyDetails();

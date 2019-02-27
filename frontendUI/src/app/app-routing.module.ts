@@ -1,7 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import {ServersComponent} from './servers/servers.component';
+import {HealthCheckComponent} from './health-check/health-check.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  { path: 'servers', component: ServersComponent },
+  { path: 'healthchecks/:linkToHealthChecks', component: HealthCheckComponent },
+  { path: '', redirectTo: '/servers', pathMatch: 'full' }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

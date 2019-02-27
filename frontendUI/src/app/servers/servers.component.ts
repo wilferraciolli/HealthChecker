@@ -15,7 +15,7 @@ export class ServersComponent implements OnInit {
   constructor(private serverService: ServerService) { }
 
   ngOnInit() {
-    this.subscription = this.serverService.getAll().subscribe(data => {
+    this.subscription = this.serverService.getAllServers().subscribe(data => {
       this.servers = data;
     });
   }

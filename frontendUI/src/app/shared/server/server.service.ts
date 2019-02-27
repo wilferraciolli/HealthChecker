@@ -14,7 +14,7 @@ export class ServerService {
    */
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<any> {
+  getAllServers(): Observable<any> {
     return this.http.get(this.SERVERS_API);
   }
 
