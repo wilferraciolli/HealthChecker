@@ -1,4 +1,9 @@
 # FrontendUI
+This is a trial for docker image running this angular app
+to run it open up cmd and run
+
+  docker build --rm -f frontendUI/Dockerfile -t frontendui:latest frontendUI
+
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.0.
 
