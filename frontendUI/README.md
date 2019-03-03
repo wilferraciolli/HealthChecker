@@ -1,9 +1,25 @@
 # FrontendUI
 This is a trial for docker image running this angular app
-to run it open up cmd and run
+to run it open up cmd, navigate to the root folder of fromtendui and run
+  docker build -t healtcheck/frontend-ui .
 
-  docker build --rm -f frontendUI/Dockerfile -t frontendui:latest frontendUI
-
+followed by (The command below binds the external port of 6001 to the default port of the server)
+    docker run --rm -d -p 6001:80 healtcheck/frontend-ui
+  
+followed by creating docke r compose
+  version: '3.1'
+  services:
+    app:
+      image: 'frontend-ui'
+      build: '.'
+      ports:
+        - 3000:80
+        
+### Scripts to stop and remove image
+  docker stop <containerid>
+  docker rm <containerid>
+  
+  docker rmi <imageid>
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.0.
 

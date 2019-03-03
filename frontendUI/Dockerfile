@@ -13,7 +13,7 @@ COPY . .
 RUN npm install
 
 ## build the application
-RUN npm rin build --prod
+RUN npm run build --prod
 
 
 ### STAGE 2: Setup, used for running the application ###

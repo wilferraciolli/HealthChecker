@@ -1,10 +1,11 @@
 package com.wiltech.health.check.client;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wiltech.health.check.EndPointStatusPayload;
-import com.wiltech.health.check.HealthCheck;
-import com.wiltech.health.check.HealthCheckRepository;
-import com.wiltech.health.check.servers.ServerDescriptionRepository;
+import java.net.Authenticator;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.time.LocalDateTime;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,14 +14,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import java.net.Authenticator;
-import java.net.PasswordAuthentication;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.time.LocalDateTime;
-import java.util.UUID;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.wiltech.health.check.EndPointStatusPayload;
+import com.wiltech.health.check.HealthCheck;
+import com.wiltech.health.check.HealthCheckRepository;
+import com.wiltech.health.check.servers.ServerDescriptionRepository;
 
 /**
  * The type Health checker client.
@@ -45,7 +43,7 @@ public class HealthCheckerClient {
     @Scheduled(cron = "0/60 * * * * ?")
     public void getHealthStatuses() {
 
-        setProxyDetails();
+        //setProxyDetails();
 
         HttpClient httpClient = generateClient();
 
