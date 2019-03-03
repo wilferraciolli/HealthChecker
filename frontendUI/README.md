@@ -1,19 +1,19 @@
 # FrontendUI
 This is a trial for docker image running this angular app
 to run it open up cmd, navigate to the root folder of fromtendui and run
-  docker build -t healtcheck/frontend-ui .
+  docker build -t healthcheck/frontend-ui .
 
 followed by (The command below binds the external port of 6001 to the default port of the server)
-    docker run --rm -d -p 6001:80 healtcheck/frontend-ui
+    docker run --rm -d -p 6001:80 healthcheck/frontend-ui
   
-followed by creating docke r compose
+followed by creating docker compose
   version: '3.1'
   services:
     app:
-      image: 'frontend-ui'
+      image: 'healhcheck/frontend-ui'
       build: '.'
       ports:
-        - 3000:80
+        - 6001:80
         
 ### Scripts to stop and remove image
   docker stop <containerid>
