@@ -38,9 +38,9 @@ public class HealthCheckerClient {
     private ServerDescriptionRepository serverDescriptionRepository;
 
     /**
-     * Gets health statuses.
+     * Gets health statuses. It is scheduled to run Mon-Fri every 30 minutes.
      */
-    @Scheduled(cron = "0/60 * * * * ?")
+    @Scheduled(cron = "0 0/30 * * * 1-5")
     public void getHealthStatuses() {
 
         //setProxyDetails();
@@ -69,12 +69,13 @@ public class HealthCheckerClient {
                         .version(payload.getVersion())
                         .buildSHA(payload.getBuildSHA())
                         .groupId(payload.getGroupId())
-                        .responseCode(LocalDateTime.now().getSecond() % 2 == 0 ? HttpStatus.OK.value() : HttpStatus.BAD_REQUEST.value())
+//                        .responseCode(LocalDateTime.now().getSecond() % 2 == 0 ? HttpStatus.OK.value() : HttpStatus.BAD_REQUEST.value())
+                        .responseCode(HttpStatus.OK.value())
                         .createdDateTime(LocalDateTime.now())
                         .build());
 
             } else {
-                logger.warn("Could not get a 200 on %s health check", healthCheckType.name());
+                logger.warn("Could not get a 200 on {} health check", healthCheckType.name());
                 repository.save(HealthCheck.builder()
                         .serverId(serverDescriptionRepository.findByName(healthCheckType.name()).get().getId())
                         .name(healthCheckType.name())

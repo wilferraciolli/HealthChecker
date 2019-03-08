@@ -36,7 +36,7 @@ public enum HealthStatusType {
     /**
      * Custom cards health status type.
      */
-    CUSTOM_CARDS("https://devint.eu.peoplefirst-dev.com/api/v1/socialfeed/servicestatus/healthcheck", "CUSTOM_CARDS"),
+    CUSTOM_CARDS("https://devint.eu.peoplefirst-dev.com/api/v1/customcards/servicestatus/healthcheck", "CUSTOM_CARDS"),
     /**
      * Hrm health status type.
      */
