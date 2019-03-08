@@ -18,6 +18,17 @@ export class ServerService {
     return this.http.get(this.SERVERS_API);
   }
 
+  getServerVersionByUrl(url: string) {
+    return this.http.get( url);
+  }
+
+  /**
+   * Refresh the health check for every server.
+   */
+  refreshServersHealthCheck() {
+    return this.http.get(this.SERVERS_API + '/refresh');
+  }
+
   /**
    * Get by id.
    * @param {string} id

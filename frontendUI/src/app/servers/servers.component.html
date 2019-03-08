@@ -5,6 +5,9 @@
 
   <router-outlet></router-outlet>
   <!-- servers -->
+  <div class="text-right">
+  <button type="button" class="btn btn-link mr-1" (click)="refreshServersHealthCheck()">Refresh</button>
+  </div>
   <div class="row card-group">
     <div class="col-4" *ngFor="let server of servers">
       <div class="card" style="width: 18rem;">
@@ -18,17 +21,9 @@
 
          <!-- overall percentage -->
           <app-overall [linkToOverall]="server.customLinks[1].href"></app-overall>
-          <!--<a href="{{server.customLinks[0].href}}" class="card-link">Card link</a>-->
-          <!--<a href="#" class="card-link">View Health Checks</a>-->
-          <!--<button routerLink="/url"> Button Label</button>-->
-          <!--<nav>-->
-          <a [routerLink]="['/healthchecks/', server.customLinks[0].href]" routerLinkActive="active">View Health Checks</a>
-            <!--<a routerLink="/health-checks" routerLinkActive="active">Crisis Center</a>-->
-            <!--<a routerLink="health-check" routerLinkActive="active">Crisis Center</a>-->
-            <!--<a routerLink="/heroes" routerLinkActive="active">Heroes</a>-->
-          <!--</nav>-->
+          <app-version-details [urlToServerVersionDetails]="server.customLinks[2].href"></app-version-details>
 
-          <!--<a [routerLink]="['/health-checks','http://localhost:5001/api/servers/1/healthchecks']">dddd</a>-->
+          <a [routerLink]="['/healthchecks/', server.customLinks[0].href]" routerLinkActive="active">View Health Checks</a>
         </div>
       </div>
     </div>

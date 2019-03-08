@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Subscription } from "rxjs/Subscription";
+import {Component, Input, OnInit} from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
 import { ServerService } from '../shared/server/server.service';
 
 @Component({
@@ -17,6 +17,12 @@ export class ServersComponent implements OnInit {
   ngOnInit() {
     this.subscription = this.serverService.getAllServers().subscribe(data => {
       this.servers = data;
+    });
+  }
+
+  refreshServersHealthCheck() {
+    this.subscription = this.serverService.refreshServersHealthCheck().subscribe(data => {
+     console.log(data);
     });
   }
 
