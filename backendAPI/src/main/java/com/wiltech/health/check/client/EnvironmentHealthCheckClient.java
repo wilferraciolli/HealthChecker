@@ -46,7 +46,8 @@ public class EnvironmentHealthCheckClient {
     }
 
     private String formatUrl(String url, Environment environment) {
-        return url + "tec=" + environment.getTenantCode() + "-" + environment.getEnvironmentCode();
+      logger.info(url + "?tec=" + environment.getTenantCode() + "-" + environment.getEnvironmentCode());
+        return url + "?tec=" + environment.getTenantCode() + "-" + environment.getEnvironmentCode();
     }
 
     private Integer getHealthCheck(HttpClient httpClient, HttpRequest request) {
