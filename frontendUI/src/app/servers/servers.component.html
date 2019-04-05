@@ -8,18 +8,16 @@
   <div class="text-right">
   <button type="button" class="btn btn-link mr-1" (click)="refreshServersHealthCheck()">Refresh</button>
   </div>
-  <div class="row card-group">
+<div class="row card-group">
     <div class="col-4" *ngFor="let server of servers">
       <div class="card server" style="width: 18rem;" [ngClass]="{ 'server--is-up': server.currentStatus === 200 }">
         <div class="card-body" >
           <h5 class="card-title">{{server.name}}</h5>
-          <!--<h6 class="card-subtitle mb-2 text-muted">{{server.deployment}} deployment</h6>-->
           <h6 class="card-subtitle mb-2 text-muted" *ngIf="server.primaryDeployment; else primaryDeployment" > This is a primary deployment</h6>
           <ng-template #primaryDeployment>
            <h6 class="card-subtitle mb-2 text-muted">The primary deployment is {{server.deployment}}</h6>
           </ng-template>
 
-         <!-- overall percentage -->
           <app-overall [linkToOverall]="server.customLinks[1].href"></app-overall>
           <app-version-details [urlToServerVersionDetails]="server.customLinks[2].href"></app-version-details>
           <a [routerLink]="['/healthchecks/', server.customLinks[0].href]" routerLinkActive="active">View Health Checks</a>
@@ -28,7 +26,7 @@
     </div>
   </div>
 
-  <div class="row card-group">
+ <!-- <div class="row card-group">
     <div class="heatMapContainer">
         <div class="heatMapItem"
           [ngClass]="{ 'heatMapItem--is-up': server.currentStatus === 200 }"
@@ -39,6 +37,6 @@
           </div>
         </div>
     </div>
-  </div>
+  </div>-->
 
 </div>

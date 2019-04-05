@@ -1,0 +1,30 @@
+.tenant {
+  display:block;
+  margin:1em 0 2em;
+  text-align:center;
+}
+
+.tenantHeatMap-title {
+}
+
+.tenantHeatMap-container {
+  display: flex;
+  flex-wrap: wrap;
+  width:100%;
+}
+
+.heatMapItem {
+  flex: 0 0 25%;
+  background-color: red;
+  color:white;
+  position: relative;
+  border:1px solid white;
+}
+.tenantHeatMapItem {
+  padding:1em;
+  border:1px solid black;
+  background-color: red;
+}
+.tenantHeatMapItem--is-up {
+  background-color: green;
+}
