@@ -78,21 +78,21 @@ public class EnvironmentHealthCheckClient {
     private List<Environment> getEnvironments() {
         Environment env1 = Environment.builder()
                 .id(1L)
+                .tenantCode("DevEnv")
+                .environmentCode("WilDev")
+                .statuses(new ArrayList<>())
+                .build();
+
+        Environment env2 = Environment.builder()
+                .id(1L)
                 .tenantCode("Polaris")
                 .environmentCode("Dev1")
                 .statuses(new ArrayList<>())
                 .build();
-        Environment env2 = Environment.builder()
+        Environment env3 = Environment.builder()
                 .id(1L)
                 .tenantCode("Polaris")
                 .environmentCode("Sally1")
-                .statuses(new ArrayList<>())
-                .build();
-
-        Environment env3 = Environment.builder()
-                .id(1L)
-                .tenantCode("DevEnv")
-                .environmentCode("WilDev")
                 .statuses(new ArrayList<>())
                 .build();
 
