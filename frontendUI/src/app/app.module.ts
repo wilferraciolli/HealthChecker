@@ -13,6 +13,7 @@ import { ServerService } from './shared/server/server.service';
 import { ServerOverallService } from './shared/server/server.overall.service';
 import { HealthCheckService } from './shared/server/health-check.service';
 import { VersionDetailsComponent } from './version-details/version-details.component';
+import { ServerCurrentStatusComponent } from './server-current-status/server-current-status.component';
 
 // const appRoutes: Routes = [
 //   { path: 'health-checks/:url', component: HealthCheckComponent },
@@ -26,7 +27,8 @@ import { VersionDetailsComponent } from './version-details/version-details.compo
     ServersComponent,
     OverallComponent,
     HealthCheckComponent,
-    VersionDetailsComponent
+    VersionDetailsComponent,
+    ServerCurrentStatusComponent
   ],
   imports: [
     BrowserModule,

@@ -57,18 +57,25 @@ public class HealthCheckRestService {
         return Double.valueOf(successResponse * 100 / healthChecks.size());
     }
 
+    @GetMapping("/{id}/currentstatus")
+    public Integer getServeCurrentStatus(@PathVariable("id") final Long id) {
+        List<HealthCheck> healthChecks = repository.findByServerIdOrderByCreatedDateTimeDesc(id);
+
+        return healthChecks.get(0).getResponseCode();
+    }
+
     @GetMapping("/{id}/versiondetails")
     public HealthCheck getServerVersionDetails(@PathVariable("id") final Long id) {
         try {
             List<HealthCheck> healthChecks = repository.findByServerIdOrderByCreatedDateTimeDesc(id);
 
-            if (healthChecks.isEmpty() || !healthChecks.get(healthChecks.size()-1).getResponseCode().equals(200)) {
+            if (healthChecks.isEmpty() || !healthChecks.get(healthChecks.size() - 1).getResponseCode().equals(200)) {
                 return buildUnknownHealthCheck(id);
             } else {
                 return healthChecks.get(healthChecks.size() - 1);
             }
-        }catch (Exception e){
-            logger.error(String.format("An Error occurred because %s, message %s ",  e.getCause() , e.getMessage()));
+        } catch (Exception e) {
+            logger.error(String.format("An Error occurred because %s, message %s ", e.getCause(), e.getMessage()));
             return buildUnknownHealthCheck(id);
         }
     }

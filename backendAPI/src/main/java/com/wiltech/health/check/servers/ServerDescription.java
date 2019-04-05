@@ -30,6 +30,8 @@ public class ServerDescription {
     @Transient
     private Boolean primaryDeployment;
 
+    private Integer currentStatus;
+
     @Transient
     private List<Link> customLinks;
 
