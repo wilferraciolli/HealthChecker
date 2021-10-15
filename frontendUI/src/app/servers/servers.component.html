@@ -1,8 +1,5 @@
 <div class="jumbotron">
-  <h1 class="display-4">Dev Int Health checker!</h1>
-  <p class="lead">Health check app to monitor different micro-services via the health status and profile end points.</p>
-  <a [routerLink]="['/tenants/']" routerLinkActive="active">View tenants health check</a>
-  <hr class="my-4">
+<!--  <hr class="my-4">-->
 
   <router-outlet></router-outlet>
   <!-- servers -->
@@ -10,7 +7,7 @@
   <button type="button" class="btn btn-link mr-1" (click)="refreshServersHealthCheck()">Refresh</button>
   </div>
 <div class="row card-group">
-    <div class="col-4" *ngFor="let server of servers">
+    <div class="col-lg-3 col-md-6" *ngFor="let server of servers">
       <div class="card server" style="width: 18rem;" [ngClass]="{ 'server--is-up': server.currentStatus === 200 }">
         <div class="card-body" >
           <h5 class="card-title">{{server.name}}</h5>

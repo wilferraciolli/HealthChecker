@@ -15,6 +15,7 @@ import { HealthCheckService } from './shared/server/health-check.service';
 import { VersionDetailsComponent } from './version-details/version-details.component';
 import { ServerCurrentStatusComponent } from './server-current-status/server-current-status.component';
 import { TenantsComponent } from './tenants/tenants.component';
+import { HeaderComponent } from './header/header.component';
 
 // const appRoutes: Routes = [
 //   { path: 'health-checks/:url', component: HealthCheckComponent },
@@ -30,7 +31,8 @@ import { TenantsComponent } from './tenants/tenants.component';
     HealthCheckComponent,
     VersionDetailsComponent,
     ServerCurrentStatusComponent,
-    TenantsComponent
+    TenantsComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
