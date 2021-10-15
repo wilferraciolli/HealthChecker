@@ -1,17 +1,16 @@
 package com.wiltech;
 
-import com.wiltech.health.check.client.HealthStatusType;
-import com.wiltech.health.check.servers.ServerDescription;
-import com.wiltech.health.check.servers.ServerDescriptionRepository;
-import lombok.val;
+import java.util.stream.Stream;
+
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.actuate.endpoint.web.Link;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-import java.util.stream.Stream;
+import com.wiltech.health.check.client.HealthStatusDevIntType;
+import com.wiltech.health.check.servers.ServerDescription;
+import com.wiltech.health.check.servers.ServerDescriptionRepository;
 
 @SpringBootApplication
 @EnableScheduling
@@ -29,15 +28,18 @@ public class BackendApiApplication {
      */
     @Bean
     ApplicationRunner init(ServerDescriptionRepository repository) {
-        //Populate a list of health checks on
-        return args -> {
-            Stream.of(HealthStatusType.values()).forEach(statusType -> {
+        //Populate a list of servers if needed
 
-                repository.save(ServerDescription.builder()
-                        .name(statusType.name())
-                        .deployment(statusType.getDeployment())
-                        .build());
-            });
+        boolean needsCreating = repository.findAll().isEmpty();
+        return args -> {
+            if (needsCreating) {
+                Stream.of(HealthStatusDevIntType.values()).forEach(statusType -> {
+                    repository.save(ServerDescription.builder()
+                            .name(statusType.name())
+                            .deployment(statusType.getDeployment())
+                            .build());
+                });
+            }
 
             repository.findAll().forEach(System.out::println);
         };

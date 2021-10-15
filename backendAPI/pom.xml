@@ -59,12 +59,14 @@
 			<artifactId>mssql-jdbc</artifactId>
 			<version>7.2.1.jre11</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
 		<dependency>
 			<groupId>com.microsoft.sqlserver</groupId>
-			<artifactId>sqljdbc4</artifactId>
-			<version>4.0</version>
+			<artifactId>mssql-jdbc</artifactId>
+			<version>9.4.0.jre11</version>
 		</dependency>
-
+		
+		
 		<!--<dependency>-->
 			<!--<groupId>com.h2database</groupId>-->
 			<!--<artifactId>h2</artifactId>-->

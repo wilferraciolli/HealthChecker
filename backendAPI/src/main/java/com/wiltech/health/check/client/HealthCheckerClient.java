@@ -47,13 +47,13 @@ public class HealthCheckerClient {
 
         HttpClient httpClient = generateClient();
 
-        for (HealthStatusType healthCheck : HealthStatusType.values()) {
+        for (HealthStatusDevIntType healthCheck : HealthStatusDevIntType.values()) {
             HttpRequest request = generateRequest(healthCheck.getUrl());
             getHealthCheck(httpClient, request, healthCheck);
         }
     }
 
-    private void getHealthCheck(HttpClient httpClient, HttpRequest request, HealthStatusType healthCheckType) {
+    private void getHealthCheck(HttpClient httpClient, HttpRequest request, HealthStatusDevIntType healthCheckType) {
         try {
             //get payload
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());

@@ -3,7 +3,7 @@ package com.wiltech.health.check.client;
 /**
  * The enum Health status type.
  */
-public enum HealthStatusType {
+public enum HealthStatusProdType {
     /**
      * Talent health status type.
      */
@@ -44,7 +44,7 @@ public enum HealthStatusType {
   private final String url;
   private final String deployment;
 
-    HealthStatusType(String url, String deployment) {
+    HealthStatusProdType(String url, String deployment) {
         this.url = url;
         this.deployment = deployment;
     }
